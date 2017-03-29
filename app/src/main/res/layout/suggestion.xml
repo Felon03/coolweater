@@ -16,7 +16,21 @@
         android:textSize="20sp"/>
 
     <TextView
+        android:id="@+id/air_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColor="#fff"/>
+
+    <TextView
         android:id="@+id/comfort_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/dress_guide_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -28,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:textColor="#fff"/>
+
 
     <TextView
         android:id="@+id/sport_text"

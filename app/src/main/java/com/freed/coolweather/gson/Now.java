@@ -8,14 +8,24 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Now {
+    public Wind wind;
+
     @SerializedName("tmp")
     public String temperature;
 
     @SerializedName("cond")
     public More more;
 
+    public class Wind {
+        @SerializedName("dir")
+        public String windDirection;
+
+        @SerializedName("sc")
+        public String windLevel;
+    }
+
     public class More {
-        @SerializedName("text")
-        public String info;;
+        @SerializedName("txt")
+        public String info;
     }
 }

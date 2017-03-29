@@ -8,13 +8,24 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Suggestion {
+    @SerializedName("air")
+    public Air air;
+
     @SerializedName("comf")
     public  Comfort comfort;
 
     @SerializedName("cw")
     public CarWash carWash;
 
+    @SerializedName("drsg")
+    public DressGuide dressGuide;
+
     public Sport sport;
+
+    public class Air {
+        @SerializedName("txt")
+        public String info;
+    }
 
     public class Comfort {
         @SerializedName("txt")
@@ -22,6 +33,11 @@ public class Suggestion {
     }
 
     public class CarWash {
+        @SerializedName("txt")
+        public String info;
+    }
+
+    public class DressGuide {
         @SerializedName("txt")
         public String info;
     }

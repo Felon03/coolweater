@@ -26,6 +26,8 @@ import com.freed.coolweather.service.AutoUpdateService;
 import com.freed.coolweather.util.HttpUtil;
 import com.freed.coolweather.util.Utility;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -43,12 +45,17 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView titleUpdateTime;
     private TextView degreeText;
     private TextView weatherInfoText;
+    private TextView windDirectionText;
+    private TextView windLevelText;
     private LinearLayout forecastLayout;
     private TextView aqiText;
     private TextView pm25Text;
+    private TextView qualityText;
     private TextView comfortText;
     private TextView carWashText;
     private TextView sportText;
+    private TextView airText;
+    private TextView dressText;
     private ImageView bingPicImg;
 
     private String mWeatherId;
@@ -72,11 +79,16 @@ public class WeatherActivity extends AppCompatActivity {
         titleUpdateTime = (TextView) findViewById(R.id.title_update_time);
         degreeText = (TextView) findViewById(R.id.degree_text);
         weatherInfoText = (TextView) findViewById(R.id.weather_info_text);
+        windDirectionText = (TextView) findViewById(R.id.wind_direction_text);
+        windLevelText = (TextView) findViewById(R.id.wind_level_text);
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
         aqiText = (TextView) findViewById(R.id.aqi_text);
         pm25Text = (TextView) findViewById(R.id.pm25_text);
+        qualityText = (TextView) findViewById(R.id.quality);
+        airText = (TextView) findViewById(R.id.air_text);
         comfortText = (TextView) findViewById(R.id.comfort_text);
         carWashText = (TextView) findViewById(R.id.car_wash_text);
+        dressText = (TextView) findViewById(R.id.dress_guide_text);
         sportText = (TextView) findViewById(R.id.sport_text);
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
@@ -191,18 +203,22 @@ public class WeatherActivity extends AppCompatActivity {
      */
     private void showWeatherInfo(Weather weather) {
         String cityName = weather.basic.cityName;
-        String updateTime = weather.basic.update.updateTime.split(" ")[1];
+        String updateTime = "更新时间: " +weather.basic.update.updateTime.split(" ")[1];
+        String direction = "风向: " + weather.now.wind.windDirection + "\n";
+        String level = "风力等级: " + weather.now.wind.windLevel + "级";
         String degree = weather.now.temperature + "℃";
         String weatherInfo = weather.now.more.info;
         titleCity.setText(cityName);
         titleUpdateTime.setText(updateTime);
+        windDirectionText.setText(direction);
+        windLevelText.setText(level);
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
         forecastLayout.removeAllViews();
         for (Forecast forecast : weather.forecastList) {
             View view = LayoutInflater.from(this).inflate(R.layout.forecast_item, forecastLayout, false);
             TextView dateText = (TextView) view.findViewById(R.id.date_text);
-            TextView infoText = (TextView)view.findViewById(R.id.info_text);
+            TextView infoText = (TextView) view.findViewById(R.id.info_text);
             TextView maxText = (TextView) view.findViewById(R.id.max_text);
             TextView minText = (TextView) view.findViewById(R.id.min_text);
             dateText.setText(forecast.date);
@@ -214,11 +230,16 @@ public class WeatherActivity extends AppCompatActivity {
         if (weather.aqi != null) {
             aqiText.setText(weather.aqi.city.aqi);
             pm25Text.setText(weather.aqi.city.pm25);
+            qualityText.setText(weather.aqi.city.quality);
         }
+        String air = "空气情况: " + weather.suggestion.air.info;
         String comfort = "舒适度: " + weather.suggestion.comfort.info;
+        String dress = "穿衣指数: " + weather.suggestion.dressGuide.info;
         String carWash = "洗车指数: " + weather.suggestion.carWash.info;
         String sport = "运动建议: " + weather.suggestion.sport.info;
+        airText.setText(air);
         comfortText.setText(comfort);
+        dressText.setText(dress);
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
