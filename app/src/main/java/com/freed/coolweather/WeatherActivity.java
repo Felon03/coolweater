@@ -205,7 +205,7 @@ public class WeatherActivity extends AppCompatActivity {
         String cityName = weather.basic.cityName;
         String updateTime = "更新时间: " +weather.basic.update.updateTime.split(" ")[1];
         String direction = "风向: " + weather.now.wind.windDirection + "\n";
-        String level = "风力等级: " + weather.now.wind.windLevel + "级";
+        String level = "风力等级: " + weather.now.wind.windLevel;
         String degree = weather.now.temperature + "℃";
         String weatherInfo = weather.now.more.info;
         titleCity.setText(cityName);
